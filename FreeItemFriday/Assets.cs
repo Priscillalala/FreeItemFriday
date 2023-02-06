@@ -1,6 +1,7 @@
 ﻿using System;
 using GrooveSharedUtils;
 using GrooveSharedUtils.Attributes;
+using GrooveSharedUtils.ScriptableObjects;
 using JetBrains.Annotations;
 using RoR2;
 using UnityEngine;
@@ -15,6 +16,19 @@ namespace FreeItemFriday
         public static class Items
         {
             [CanBeNull] public static ItemDef Theremin;
+            [CanBeNull] public static ItemDef Arrowhead;
+        }
+        public static class DamageColors
+        {
+            [CanBeNull] public static ModdedDamageColorDef StrongerBurn;
+        }
+        public static class Unlockables
+        {
+            [CanBeNull] public static UnlockableDef Items_Arrowhead;
+        }
+        public static class Achievements
+        {
+            [CanBeNull] public static AchievementDef BurnMultipleEnemies;
         }
     }
 }

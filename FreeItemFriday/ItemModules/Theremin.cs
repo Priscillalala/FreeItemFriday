@@ -54,12 +54,13 @@ namespace FreeItemFriday.ItemModules
         {
             yield return new ItemFrame
             {
-                name = "Theremin",
+                name = nameof(Items.Theremin),
                 icon = bundle.LoadAsset<Sprite>("texThereminIcon"),
                 itemTier = ItemTier.Tier2,
                 pickupModelPrefab = bundle.LoadAsset<GameObject>("PickupTheremin"),
             }.SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect).Build();
             GSUtil.SetupModelPanelParameters(Items.Theremin.pickupModelPrefab, new Vector3(56, 180, 0), 1, 5);
+
             GameObject displayPrefab = bundle.LoadAsset<GameObject>("DisplayTheremin");
             GSUtil.SetupItemDisplay(displayPrefab);
             SingleItemDisplayFrame.Create(Items.Theremin, displayPrefab)
