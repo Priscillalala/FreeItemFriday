@@ -7,7 +7,6 @@ using GrooveSharedUtils.Attributes;
 using GrooveSharedUtils.Interfaces;
 using RoR2;
 using RoR2.Items;
-using static FreeItemFriday.Assets;
 using static GrooveSharedUtils.Common;
 using R2API;
 using System.Collections;
@@ -15,8 +14,9 @@ using HG;
 using RoR2.Achievements;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using FreeItemFriday.Achievements;
 
-namespace FreeItemFriday.ItemModules
+namespace FreeItemFriday.Items
 {
     [Configurable]
     public class Arrowhead : ModModule<Arrowhead>
@@ -39,12 +39,12 @@ namespace FreeItemFriday.ItemModules
         private void DotController_InitDotCatalog(On.RoR2.DotController.orig_InitDotCatalog orig)
         {
             orig();
-            DotController.dotDefs[(int)DotController.DotIndex.StrongerBurn].damageColorIndex = DamageColors.StrongerBurn.damageColorIndex;
+            DotController.dotDefs[(int)DotController.DotIndex.StrongerBurn].damageColorIndex = Assets.DamageColors.StrongerBurn.damageColorIndex;
         }
 
         private void Events_onHitEnemyServer(DamageInfo damageInfo, GameObject victim)
         {
-            if (damageInfo.attacker && damageInfo.attacker.TryGetComponent(out CharacterBody attackerBody) && attackerBody.HasItem(Items.Arrowhead, out int stack) && Util.CheckRoll(100f * damageInfo.procCoefficient, attackerBody.master))
+            if (damageInfo.attacker && damageInfo.attacker.TryGetComponent(out CharacterBody attackerBody) && attackerBody.HasItem(Assets.Items.Arrowhead, out int stack) && Util.CheckRoll(100f * damageInfo.procCoefficient, attackerBody.master))
             {
                 InflictDotInfo inflictDotInfo = new InflictDotInfo
                 {
@@ -86,43 +86,43 @@ namespace FreeItemFriday.ItemModules
         {
             yield return new AchievementFrame
             {
-                identifier = nameof(Achievements.BurnMultipleEnemies),
+                identifier = nameof(Assets.Achievements.BurnMultipleEnemies),
                 unlockableRewardName = "Items.Arrowhead",
-                achievementIcon = bundle.LoadAsset<Sprite>("texBurnMultipleEnemiesIcon")
+                achievementIcon = Assets.bundle.LoadAsset<Sprite>("texBurnMultipleEnemiesIcon")
             }.SetTrackerTypes<BurnMultipleEnemiesAchievement, BurnMultipleEnemiesAchievement.ServerAchievement>().Build();
 
             yield return new ItemFrame
             {
                 name = nameof(Items.Arrowhead),
-                icon = bundle.LoadAsset<Sprite>("texArrowheadIcon"),
+                icon = Assets.bundle.LoadAsset<Sprite>("texArrowheadIcon"),
                 itemTier = ItemTier.Tier1,
-                pickupModelPrefab = bundle.LoadAsset<GameObject>("PickupArrowhead"),
-                unlockableDef = Unlockables.Items_Arrowhead,
+                pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupArrowhead"),
+                unlockableDef = Assets.Unlockables.Items_Arrowhead,
             }.SetItemTags(ItemTag.Damage).Build();
-            GSUtil.SetupModelPanelParameters(Items.Arrowhead.pickupModelPrefab, Vector3.zero, 1, 8);
+            GSUtil.SetupModelPanelParameters(Assets.Items.Arrowhead.pickupModelPrefab, Vector3.zero, 1, 8);
 
-            GameObject displayPrefab = bundle.LoadAsset<GameObject>("DisplayArrowhead");
+            GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayArrowhead");
             GSUtil.SetupItemDisplay(displayPrefab);
-            SingleItemDisplayFrame.Create(Items.Arrowhead, displayPrefab)
-                .Add(Idrs.Commando)
-                .Add(Idrs.Huntress)
-                .Add(Idrs.Bandit2)
-                .Add(Idrs.Toolbot)
-                .Add(Idrs.Engi)
-                .Add(Idrs.EngiTurret)
-                .Add(Idrs.EngiWalkerTurret)
-                .Add(Idrs.Mage)
-                .Add(Idrs.Merc)
-                .Add(Idrs.Treebot)
-                .Add(Idrs.Loader)
-                .Add(Idrs.Croco)
-                .Add(Idrs.Captain)
-                .Add(Idrs.RailGunner)
-                .Add(Idrs.VoidSurvivor)
-                .Add(Idrs.Scav)
+            SingleItemDisplayFrame.Create(Assets.Items.Arrowhead, displayPrefab)
+                .Add(Idrs.Commando, "Pelvis", new Vector3(-0.162F, -0.09F, -0.053F), new Vector3(7.522F, 244.056F, 358.818F), new Vector3(0.469F, 0.469F, 0.469F))
+                .Add(Idrs.Huntress, "Arrow", new Vector3(0.343F, 0F, 0F), new Vector3(87.415F, 144.866F, 55.112F), new Vector3(0.388F, 0.388F, 0.388F))
+                .Add(Idrs.Bandit2, "Chest", new Vector3(0.153F, -0.144F, 0.066F), new Vector3(355.538F, 89.398F, 170.59F), new Vector3(0.507F, 0.507F, 0.507F))
+                .Add(Idrs.Toolbot, "Head", new Vector3(-0.925F, 2.842F, 1.601F), new Vector3(45.327F, 331.491F, 198.947F), new Vector3(3.118F, 3.118F, 3.118F))
+                .Add(Idrs.Engi, "Pelvis", new Vector3(0.205F, 0.05F, -0.102F), new Vector3(0F, 114.381F, 354.036F), new Vector3(0.523F, 0.523F, 0.523F))
+                .Add(Idrs.EngiTurret, "Head", new Vector3(0.681F, 1.016F, -0.988F), new Vector3(0.775F, 180F, 202.127F), new Vector3(1.588F, 1.588F, 1.588F))
+                .Add(Idrs.EngiWalkerTurret, "Head", new Vector3(0.566F, 1.491F, -0.94F), new Vector3(7.103F, 180F, 204.769F), new Vector3(1.588F, 1.588F, 1.588F))
+                .Add(Idrs.Mage, "Pelvis", new Vector3(-0.159F, -0.085F, -0.09F), new Vector3(356.235F, 252.299F, 344.311F), new Vector3(0.46F, 0.46F, 0.46F))
+                .Add(Idrs.Merc, "UpperArmL", new Vector3(0.161F, -0.006F, 0.001F), new Vector3(29.587F, 212.128F, 321.824F), new Vector3(0.493F, 0.493F, 0.493F))
+                .Add(Idrs.Treebot, "PlatformBase", new Vector3(1.062F, 0.782F, 0.174F), new Vector3(337.728F, 201.301F, 224.188F), new Vector3(1.056F, 1.056F, 1.056F))
+                .Add(Idrs.Loader, "MechUpperArmL", new Vector3(0.037F, 0.053F, -0.154F), new Vector3(335.055F, 244.872F, 293.27F), new Vector3(0.547F, 0.547F, 0.547F))
+                .Add(Idrs.Croco, "Head", new Vector3(1.926F, -0.053F, -0.112F), new Vector3(45.85F, 17.71F, 113.992F), new Vector3(5.36F, 5.36F, 5.36F))
+                .Add(Idrs.Captain, "ClavicleL", new Vector3(0.021F, 0.136F, -0.226F), new Vector3(52.975F, 287.284F, 287.388F), new Vector3(0.587F, 0.587F, 0.587F))
+                .Add(Idrs.RailGunner, "Pelvis", new Vector3(0.155F, 0.079F, -0.029F), new Vector3(10.264F, 100.904F, 358.845F), new Vector3(0.434F, 0.434F, 0.434F))
+                .Add(Idrs.VoidSurvivor, "ShoulderL", new Vector3(0.063F, 0.289F, 0.052F), new Vector3(13.815F, 321.452F, 169.227F), new Vector3(0.597F, 0.597F, 0.597F))
+                .Add(Idrs.Scav, "Weapon", new Vector3(3.037F, 8.08F, 2.629F), new Vector3(45.304F, 318.616F, 106.156F), new Vector3(5.5F, 5.5F, 5.5F))
                 .Build();
 
-            yield return DamageColorFrame.Create(nameof(DamageColors.StrongerBurn), new Color32(244, 113, 80, 255)).Build();
+            yield return DamageColorFrame.Create(nameof(Assets.DamageColors.StrongerBurn), new Color32(244, 113, 80, 255)).Build();
 
             impactArrowhead = omniExplosionVFXQuick.WaitForCompletion().InstantiateClone("ImpactArrowhead", false);
             /*DestroyImmediate(impactArrowhead.transform.Find("ScaledSmoke, Billboard").gameObject);
@@ -160,89 +160,5 @@ namespace FreeItemFriday.ItemModules
             yield return impactArrowheadStronger;
 
         }
-
-        public class BurnMultipleEnemiesAchievement : BaseAchievement
-        {
-            public static bool IsBurnDot(DotController.DotIndex index) => index == DotController.DotIndex.Burn || index == DotController.DotIndex.PercentBurn || index == DotController.DotIndex.Helfire || index == DotController.DotIndex.StrongerBurn;
-            public override void OnInstall()
-            {
-                base.OnInstall();
-                base.SetServerTracked(true);
-            }
-            public override void OnUninstall()
-            {
-                base.SetServerTracked(false);
-                base.OnUninstall();
-            }
-            public class ServerAchievement : BaseServerAchievement
-            {
-                private List<DotController> affectedDotControllers;
-                public override void OnInstall()
-                {
-                    base.OnInstall();
-                    affectedDotControllers = new List<DotController>();
-                    DotController.onDotInflictedServerGlobal += DotController_onDotInflictedServerGlobal;
-                }
-
-                private void DotController_onDotInflictedServerGlobal(DotController dotController, ref InflictDotInfo inflictDotInfo)
-                {
-                    GameObject currentBodyObject = GetCurrentBody()?.gameObject;
-                    if (!currentBodyObject) return;
-                    if (IsBurnDot(inflictDotInfo.dotIndex) && currentBodyObject == inflictDotInfo.attackerObject && currentBodyObject != inflictDotInfo.victimObject)
-                    {
-                        if (!affectedDotControllers.Contains(dotController)) affectedDotControllers.Add(dotController);
-
-                        HashSet<NetworkInstanceId> affectedBodyObjects = new HashSet<NetworkInstanceId>();
-                        int burningEnemiesCount = 0;
-                        for (int i = affectedDotControllers.Count - 1; i >= 0; i--)
-                        {
-                            DotController otherDotController = affectedDotControllers[i];
-                            if (!otherDotController)
-                            {
-                                affectedDotControllers.RemoveAt(i);
-                                continue;
-                            }
-
-                            if (affectedBodyObjects.Contains(otherDotController.victimObjectId)) continue;
-
-                            affectedBodyObjects.Add(otherDotController.victimObjectId);
-
-                            if (IsDotControllerBurning(otherDotController, currentBodyObject))
-                            {
-                                burningEnemiesCount++;
-                            }
-                            else
-                            {
-                                affectedDotControllers.RemoveAt(i);
-                            }
-                        }
-                        if (burningEnemiesCount >= 10)
-                        {
-                            base.Grant();
-                        }
-                    }
-                }
-                public bool IsDotControllerBurning(DotController dotController, GameObject currentBodyObject)
-                {
-                    for (int i = 0; i < dotController.dotStackList.Count; i++)
-                    {
-                        DotController.DotStack dotStack = dotController.dotStackList[i];
-                        if (IsBurnDot(dotStack.dotIndex) && dotStack.attackerObject == currentBodyObject)
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
-                public override void OnUninstall()
-                {
-                    DotController.onDotInflictedServerGlobal -= DotController_onDotInflictedServerGlobal;
-                    affectedDotControllers = null;
-                    base.OnUninstall();
-                }
-            }
-        }
-
     }
 }

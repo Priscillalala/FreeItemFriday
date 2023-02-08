@@ -7,12 +7,11 @@ using GrooveSharedUtils.Attributes;
 using GrooveSharedUtils.Interfaces;
 using RoR2;
 using RoR2.Items;
-using static FreeItemFriday.Assets;
 using static GrooveSharedUtils.Common;
 using R2API;
 using System.Collections;
 
-namespace FreeItemFriday.ItemModules
+namespace FreeItemFriday.Items
 {
     [Configurable]
     public class Theremin : ModModule<Theremin>
@@ -32,7 +31,7 @@ namespace FreeItemFriday.ItemModules
         {
             orig(self, teleporter, cameraTransform, targetBody);
             self.rtpcTeleporterProximityValue.value = Util.Remap(self.rtpcTeleporterProximityValue.value, 0f, 10000f, 5000f, 10000f);
-            if (targetBody && targetBody.HasItem(Items.Theremin) && targetBody.TryGetComponent(out ThereminBehaviour behaviour))
+            if (targetBody && targetBody.HasItem(Assets.Items.Theremin) && targetBody.TryGetComponent(out ThereminBehaviour behaviour))
             {
                 self.rtpcTeleporterProximityValue.value -= 5000f * behaviour.currentBonusCoefficient;
                 float directionValue = self.rtpcTeleporterDirectionValue.value;
@@ -54,16 +53,16 @@ namespace FreeItemFriday.ItemModules
         {
             yield return new ItemFrame
             {
-                name = nameof(Items.Theremin),
-                icon = bundle.LoadAsset<Sprite>("texThereminIcon"),
+                name = nameof(Assets.Items.Theremin),
+                icon = Assets.bundle.LoadAsset<Sprite>("texThereminIcon"),
                 itemTier = ItemTier.Tier2,
-                pickupModelPrefab = bundle.LoadAsset<GameObject>("PickupTheremin"),
+                pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupTheremin"),
             }.SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect).Build();
-            GSUtil.SetupModelPanelParameters(Items.Theremin.pickupModelPrefab, new Vector3(56, 180, 0), 1, 5);
+            GSUtil.SetupModelPanelParameters(Assets.Items.Theremin.pickupModelPrefab, new Vector3(56, 180, 0), 1, 5);
 
-            GameObject displayPrefab = bundle.LoadAsset<GameObject>("DisplayTheremin");
+            GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayTheremin");
             GSUtil.SetupItemDisplay(displayPrefab);
-            SingleItemDisplayFrame.Create(Items.Theremin, displayPrefab)
+            SingleItemDisplayFrame.Create(Assets.Items.Theremin, displayPrefab)
                 .Add(Idrs.Commando, "Stomach", new Vector3(0.13491F, -0.05978F, -0.126F), new Vector3(285.9316F, 354.6909F, 343.4794F), new Vector3(1.05089F, 1.06357F, 1.05089F))
                 .Add(Idrs.Huntress, "Pelvis", new Vector3(0.14773F, 0.04592F, 0.14647F), new Vector3(55.92511F, 189.9159F, 157.5366F), new Vector3(1.06336F, 1.06336F, 1.06336F))
                 .Add(Idrs.Bandit2, "Stomach", new Vector3(0.03759F, -0.13868F, -0.20006F), new Vector3(293.316F, 358.5328F, 352.6877F), new Vector3(1.16451F, 1.16451F, 1.16451F))
@@ -86,7 +85,7 @@ namespace FreeItemFriday.ItemModules
         public class ThereminBehaviour : BaseItemBodyBehavior, IOnGetStatCoefficientsReciever
         {
             [ItemDefAssociation(useOnServer = true, useOnClient = true)]
-            public static ItemDef GetItemDef() => Items.Theremin;
+            public static ItemDef GetItemDef() => Assets.Items.Theremin;
             public float currentBonus;
             public float currentBonusCoefficient;
             public int lastPercentBonus;
