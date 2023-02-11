@@ -57,12 +57,12 @@ namespace FreeItemFriday.Items
                 icon = Assets.bundle.LoadAsset<Sprite>("texThereminIcon"),
                 itemTier = ItemTier.Tier2,
                 pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupTheremin"),
-            }.SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect).Build();
+            }.SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect);
             GSUtil.SetupModelPanelParameters(Assets.Items.Theremin.pickupModelPrefab, new Vector3(56, 180, 0), 1, 5);
 
             GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayTheremin");
             GSUtil.SetupItemDisplay(displayPrefab);
-            SingleItemDisplayFrame.Create(Assets.Items.Theremin, displayPrefab)
+            yield return SingleItemDisplayFrame.Create(Assets.Items.Theremin, displayPrefab)
                 .Add(Idrs.Commando, "Stomach", new Vector3(0.13491F, -0.05978F, -0.126F), new Vector3(285.9316F, 354.6909F, 343.4794F), new Vector3(1.05089F, 1.06357F, 1.05089F))
                 .Add(Idrs.Huntress, "Pelvis", new Vector3(0.14773F, 0.04592F, 0.14647F), new Vector3(55.92511F, 189.9159F, 157.5366F), new Vector3(1.06336F, 1.06336F, 1.06336F))
                 .Add(Idrs.Bandit2, "Stomach", new Vector3(0.03759F, -0.13868F, -0.20006F), new Vector3(293.316F, 358.5328F, 352.6877F), new Vector3(1.16451F, 1.16451F, 1.16451F))
@@ -78,8 +78,7 @@ namespace FreeItemFriday.Items
                 .Add(Idrs.Captain, "ClavicleR", new Vector3(-0.08363F, 0.47398F, 0.01307F), new Vector3(52.64773F, 174.563F, 340.3903F), new Vector3(1.36564F, 1.36564F, 1.36564F))
                 .Add(Idrs.RailGunner, "Backpack", new Vector3(0.22501F, -0.6498F, 0.05793F), new Vector3(293.1928F, 97.78774F, 253.1585F), new Vector3(1.17195F, 1.17195F, 1.17195F))
                 .Add(Idrs.VoidSurvivor, "CalfR", new Vector3(0.09434F, 0.41737F, -0.00356F), new Vector3(82.28655F, 146.8268F, 41.39848F), new Vector3(1.14532F, 1.14532F, 1.14532F))
-                .Add(Idrs.Scav, "Backpack", new Vector3(-11.52265F, 9.98327F, 1.99621F), new Vector3(284.7374F, 89.41682F, 348.9175F), new Vector3(21.38155F, 21.38155F, 21.38155F))
-                .Build();
+                .Add(Idrs.Scav, "Backpack", new Vector3(-11.52265F, 9.98327F, 1.99621F), new Vector3(284.7374F, 89.41682F, 348.9175F), new Vector3(21.38155F, 21.38155F, 21.38155F));
         }
 
         public class ThereminBehaviour : BaseItemBodyBehavior, IOnGetStatCoefficientsReciever

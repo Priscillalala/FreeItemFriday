@@ -4,6 +4,8 @@ using GrooveSharedUtils.Attributes;
 using GrooveSharedUtils.ScriptableObjects;
 using JetBrains.Annotations;
 using RoR2;
+using RoR2.ContentManagement;
+using RoR2.ExpansionManagement;
 using UnityEngine;
 
 namespace FreeItemFriday
@@ -13,6 +15,11 @@ namespace FreeItemFriday
     {
         [LoadAssetBundle(bundleName = "freeitemfridayassets")]
         public static AssetBundle bundle;
+
+        [GrooveSharedUtils.Frames.Frame.DefaultExpansionDef]
+        [TargetAssetName("FreeItemFriday")]
+        public static ExpansionDef expansion;
+
         public static class Items
         {
             [CanBeNull] public static ItemDef Theremin;
@@ -24,7 +31,7 @@ namespace FreeItemFriday
         }
         public static class Unlockables
         {
-            [CanBeNull] public static UnlockableDef Items_Arrowhead;
+            [CanBeNull] [TargetAssetName("FreeItemFriday.Items.Arrowhead")] public static UnlockableDef Arrowhead;
         }
         public static class Achievements
         {

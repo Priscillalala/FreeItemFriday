@@ -13,6 +13,8 @@ namespace FreeItemFriday.Language
         [LanguageCollectionProvider]
         public static LanguageCollection GetLang() => new LanguageCollection
         {
+            (Assets.expansion.nameToken, $"Free Item Friday"),
+            (Assets.expansion.descriptionToken, $"Adds content from the 'Free Item Friday' mod to the game."),
             (Assets.Items.Theremin?.nameToken, $"Theremin"),
             (Assets.Items.Theremin?.pickupToken, $"Increase attack speed near the Teleporter."),
             (Assets.Items.Theremin?.descriptionToken, $"Increase <style=cIsDamage>attack speed</style> by up to <style=cIsDamage>{Theremin.attackSpeedBonus:0%} <style=cStack>(+{Theremin.attackSpeedBonusPerStack:0%} per stack)</style></style> the closer you are to a Teleporter."),
