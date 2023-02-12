@@ -15,4 +15,4 @@ An example and test mod for GrooveSharedUtils. Currently adds 2 new items.
 </table>
 
 ## Contact
-You can find me on Discord @Groove_Salad#7700.
+You can find me in the [Spikestrip Modding Server](https://discord.gg/me7P53smzk) @Groove_Salad#7700
