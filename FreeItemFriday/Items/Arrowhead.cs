@@ -18,7 +18,7 @@ using FreeItemFriday.Achievements;
 
 namespace FreeItemFriday.Items
 {
-    [Configurable]
+    [Configurable(section = "Flint Arrowhead")]
     public class Arrowhead : ModModule<Arrowhead>
     {
         [Configurable]
@@ -99,11 +99,11 @@ namespace FreeItemFriday.Items
                 pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupArrowhead"),
                 unlockableDef = Assets.Unlockables.Arrowhead,
             }.SetItemTags(ItemTag.Damage);
-            //GSUtil.SetupModelPanelParameters(Assets.Items.Arrowhead.pickupModelPrefab, Vector3.zero, 1, 8);
+            GSUtil.SetupModelPanelParameters(Assets.Items.Arrowhead.pickupModelPrefab, Vector3.zero, 1, 8);
 
             GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayArrowhead");
             GSUtil.SetupItemDisplay(displayPrefab);
-            /*yield return SingleItemDisplayFrame.Create(Assets.Items.Arrowhead, displayPrefab)
+            yield return SingleItemDisplayFrame.Create(Assets.Items.Arrowhead, displayPrefab)
                 .Add(Idrs.Commando, "Pelvis", new Vector3(-0.162F, -0.09F, -0.053F), new Vector3(7.522F, 244.056F, 358.818F), new Vector3(0.469F, 0.469F, 0.469F))
                 .Add(Idrs.Huntress, "Arrow", new Vector3(0.343F, 0F, 0F), new Vector3(87.415F, 144.866F, 55.112F), new Vector3(0.388F, 0.388F, 0.388F))
                 .Add(Idrs.Bandit2, "Chest", new Vector3(0.153F, -0.144F, 0.066F), new Vector3(355.538F, 89.398F, 170.59F), new Vector3(0.507F, 0.507F, 0.507F))
@@ -119,7 +119,7 @@ namespace FreeItemFriday.Items
                 .Add(Idrs.Captain, "ClavicleL", new Vector3(0.021F, 0.136F, -0.226F), new Vector3(52.975F, 287.284F, 287.388F), new Vector3(0.587F, 0.587F, 0.587F))
                 .Add(Idrs.RailGunner, "Pelvis", new Vector3(0.155F, 0.079F, -0.029F), new Vector3(10.264F, 100.904F, 358.845F), new Vector3(0.434F, 0.434F, 0.434F))
                 .Add(Idrs.VoidSurvivor, "ShoulderL", new Vector3(0.063F, 0.289F, 0.052F), new Vector3(13.815F, 321.452F, 169.227F), new Vector3(0.597F, 0.597F, 0.597F))
-                .Add(Idrs.Scav, "Weapon", new Vector3(3.037F, 8.08F, 2.629F), new Vector3(45.304F, 318.616F, 106.156F), new Vector3(5.5F, 5.5F, 5.5F));*/
+                .Add(Idrs.Scav, "Weapon", new Vector3(3.037F, 8.08F, 2.629F), new Vector3(45.304F, 318.616F, 106.156F), new Vector3(5.5F, 5.5F, 5.5F));
 
             yield return DamageColorFrame.Create(nameof(Assets.DamageColors.StrongerBurn), new Color32(244, 113, 80, 255));
 
