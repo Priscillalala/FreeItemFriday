@@ -21,7 +21,7 @@ namespace FreeItemFriday.Language
             (Theremin?.descriptionToken, $"Increase <style=cIsDamage>attack speed</style> by up to <style=cIsDamage>{Items.Theremin.attackSpeedBonus:0%} <style=cStack>(+{Items.Theremin.attackSpeedBonusPerStack:0%} per stack)</style></style> the closer you are to a Teleporter."),
             (Arrowhead?.nameToken, $"Flint Arrowhead"),
             (Arrowhead?.pickupToken, $"Burn enemies for flat damage on hit."),
-            (Arrowhead?.descriptionToken, $"<style=cIsDamage>100%</style> chance to <style=cIsDamage>burn</style> on hit for <style=cIsDamage>{Items.Arrowhead.damage} <style=cStack>(+{Items.Arrowhead.damagePerStack} per stack)</style> damage</style>."),
+            (Arrowhead?.descriptionToken, $"<style=cIsDamage>100%</style> chance to <style=cIsDamage>burn</style> on hit for <style=cIsDamage>{Items.Arrowhead.damage} <style=cStack>(+{Items.Arrowhead.damagePerStack} per stack)</style></style> damage."),
             (BurnMultipleEnemies?.nameToken, "Burn to Kill"),
             (BurnMultipleEnemies?.descriptionToken, "Ignite 10 enemies simultaneously."),
         };
