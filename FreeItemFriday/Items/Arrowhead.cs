@@ -98,8 +98,9 @@ namespace FreeItemFriday.Items
                 itemTier = ItemTier.Tier1,
                 pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupArrowhead"),
                 unlockableDef = Assets.Unlockables.Arrowhead,
-            }.SetItemTags(ItemTag.Damage);
-            GSUtil.SetupModelPanelParameters(Assets.Items.Arrowhead.pickupModelPrefab, Vector3.zero, 1, 8);
+            }
+            .SetItemTags(ItemTag.Damage)
+            .SetLogbookModelParameters(Vector3.zero, 1, 8);
 
             GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayArrowhead");
             GSUtil.SetupItemDisplay(displayPrefab);

@@ -25,6 +25,10 @@ namespace FreeItemFriday
             [CanBeNull] public static ItemDef Theremin;
             [CanBeNull] public static ItemDef Arrowhead;
         }
+        public static class Artifacts
+        {
+            [CanBeNull] public static ArtifactDef SlipperyTerrain;
+        }
         public static class DamageColors
         {
             [CanBeNull] public static ModdedDamageColorDef StrongerBurn;
@@ -32,10 +36,12 @@ namespace FreeItemFriday
         public static class Unlockables
         {
             [CanBeNull] [TargetAssetName("FreeItemFriday.Items.Arrowhead")] public static UnlockableDef Arrowhead;
+            [CanBeNull] [TargetAssetName("FreeItemFriday.Artifacts.SlipperyTerrain")] public static UnlockableDef SlipperyTerrain;
         }
         public static class Achievements
         {
             [CanBeNull] public static AchievementDef BurnMultipleEnemies;
+            [CanBeNull] public static AchievementDef ObtainArtifactSlipperyTerrain;
         }
     }
 }

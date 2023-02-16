@@ -20,8 +20,6 @@ namespace FreeItemFriday.Items
         public static float attackSpeedBonus = 0.45f;
         [Configurable]
         public static float attackSpeedBonusPerStack = 0.35f;
-        public float direction;
-        public float proximity;
         public void Awake()
         {
             On.RoR2.MusicController.UpdateTeleporterParameters += MusicController_UpdateTeleporterParameters;
@@ -35,19 +33,8 @@ namespace FreeItemFriday.Items
             {
                 self.rtpcTeleporterProximityValue.value -= 5000f * behaviour.currentBonusCoefficient;
                 float directionValue = self.rtpcTeleporterDirectionValue.value;
-                /*if (proximityValue > 180f)
-                {
-                    proximityValue -= 360f;
-                }
-                proximityValue *= 0.5f;
-                if (proximityValue < 0f)
-                {
-                    proximityValue += 360f;
-                }*/
                 self.rtpcTeleporterDirectionValue.value -= (directionValue <= 180f ? directionValue : directionValue - 360f) * behaviour.currentBonusCoefficient;
             }
-            direction = self.rtpcTeleporterDirectionValue.value;
-            proximity = self.rtpcTeleporterProximityValue.value;
         }
         public override IEnumerator LoadContent()
         {
@@ -57,8 +44,9 @@ namespace FreeItemFriday.Items
                 icon = Assets.bundle.LoadAsset<Sprite>("texThereminIcon"),
                 itemTier = ItemTier.Tier2,
                 pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PickupTheremin"),
-            }.SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect);
-            GSUtil.SetupModelPanelParameters(Assets.Items.Theremin.pickupModelPrefab, new Vector3(56, 180, 0), 1, 5);
+            }
+            .SetItemTags(ItemTag.Damage, ItemTag.InteractableRelated, ItemTag.OnKillEffect)
+            .SetLogbookModelParameters(new Vector3(56, 180, 0), 1, 5);
 
             GameObject displayPrefab = Assets.bundle.LoadAsset<GameObject>("DisplayTheremin");
             GSUtil.SetupItemDisplay(displayPrefab);
@@ -93,7 +81,6 @@ namespace FreeItemFriday.Items
                 if (TeleporterUtil.TryLocateTeleporter(out Vector3 position))
                 {
                     Vector3 distance = body.corePosition - position;
-                    //float reductionPercentage = Util.ConvertAmplificationPercentageIntoReductionPercentage(distance.sqrMagnitude * 0.5f) / 100f;
                     currentBonusCoefficient = 1000f / (1000f + distance.sqrMagnitude);
                     currentBonus = currentBonusCoefficient * GSUtil.StackScaling(attackSpeedBonus, attackSpeedBonusPerStack, stack);
                 }

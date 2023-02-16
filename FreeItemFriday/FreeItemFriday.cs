@@ -20,7 +20,7 @@ namespace FreeItemFriday
 
         public override string AuthorName => "groovesalad";
 
-        public override string VersionNumber => "1.0.0";
+        public override string VersionNumber => "1.1.0";
         public override IEnumerator LoadContent()
         {
             yield return new ExpansionFrame
