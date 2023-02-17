@@ -36,6 +36,7 @@ namespace FreeItemFriday.Artifacts
         [Configurable]
         public static float horizontalJumpBoostCoefficient = 0.5f;
 
+        public PhysicMaterial physmatSlidingProjectile;
         public GameObject slipperyTerrainFormulaDisplay;
         public bool didUpdateSceneVisuals = false;
         public Dictionary<Material, Material> slipperyMaterialInstances = new Dictionary<Material, Material>();
@@ -99,6 +100,7 @@ namespace FreeItemFriday.Artifacts
         }
         public void Awake()
         {
+            physmatSlidingProjectile = Assets.bundle.LoadAsset<PhysicMaterial>("physmatSlidingProjectile");
             SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
         }
         private void SceneManager_activeSceneChanged(Scene oldScene, Scene newScene)
@@ -183,14 +185,30 @@ namespace FreeItemFriday.Artifacts
             IL.EntityStates.GenericCharacterMain.ApplyJumpVelocity += GenericCharacterMain_ApplyJumpVelocity;
             IL.RoR2.CharacterMotor.PreMove += CharacterMotor_PreMove;
             On.RoR2.Projectile.ProjectileStickOnImpact.UpdateSticking += ProjectileStickOnImpact_UpdateSticking;
+            On.RoR2.Projectile.ProjectileStickOnImpact.Awake += ProjectileStickOnImpact_Awake;
         }
 
         public void OnArtifactDisabled(RunArtifactManager runArtifactManager)
         {
+            On.RoR2.Projectile.ProjectileStickOnImpact.Awake -= ProjectileStickOnImpact_Awake;
             On.RoR2.Projectile.ProjectileStickOnImpact.UpdateSticking -= ProjectileStickOnImpact_UpdateSticking;
             IL.RoR2.CharacterMotor.PreMove -= CharacterMotor_PreMove;
             IL.EntityStates.GenericCharacterMain.ApplyJumpVelocity -= GenericCharacterMain_ApplyJumpVelocity;
             On.RoR2.CharacterMotor.OnGroundHit -= CharacterMotor_OnGroundHit;
+        }
+
+        private void ProjectileStickOnImpact_Awake(On.RoR2.Projectile.ProjectileStickOnImpact.orig_Awake orig, ProjectileStickOnImpact self)
+        {
+            orig(self);
+            if (self.TryGetComponent(out Collider collider))
+            {
+                collider.sharedMaterial = physmatSlidingProjectile;
+            }
+            if (self.TryGetComponent(out ProjectileSimple projectileSimple))
+            {
+                projectileSimple.updateAfterFiring = false;
+                self.rigidbody.useGravity = true;
+            }
         }
 
         private void ProjectileStickOnImpact_UpdateSticking(On.RoR2.Projectile.ProjectileStickOnImpact.orig_UpdateSticking orig, ProjectileStickOnImpact self)
