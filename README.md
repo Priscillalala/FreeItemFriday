@@ -1,4 +1,4 @@
-## FreeItemFriday
+# FreeItemFriday
 An example and test mod for GrooveSharedUtils. Currently adds 2 new items and an artifact.
 
 ## Items
@@ -22,7 +22,15 @@ An example and test mod for GrooveSharedUtils. Currently adds 2 new items and an
         <td>Artifact of Entropy</td>
         <td><details>
             <summary>Location Hint</summary>
-            Follow a river of ice upstream to escape the valley.
+            Where trees reach the sky
+            <details>
+            <summary>...</summary>
+            near the top of a frozen waterfall
+            <details>
+            <summary>...</summary>
+            the ice holds a secret
+            </details>
+            </details>
             </details></td>
     </tr>
 </table>
