@@ -110,11 +110,12 @@ namespace FreeItemFriday.Artifacts
             }
             if (didUpdateSceneVisuals = (RunArtifactManager.instance && RunArtifactManager.instance.IsArtifactEnabled(Assets.Artifacts.SlipperyTerrain)))
             {
-                UpdateSceneVisuals();
+                StartCoroutine(nameof(UpdateSceneVisuals));
             }
         }
-        public void UpdateSceneVisuals()
+        public IEnumerator UpdateSceneVisuals()
         {
+            yield return new WaitForEndOfFrame();
             foreach (Material materialInstance in slipperyMaterialInstances.Values)
             {
                 Destroy(materialInstance);
@@ -170,12 +171,13 @@ namespace FreeItemFriday.Artifacts
                     meshRenderers[i].sharedMaterial = matInstance;
                 }
             }
+            yield break;
         }
         public void OnArtifactEnabled(RunArtifactManager runArtifactManager)
         {
             if (!didUpdateSceneVisuals)
             {
-                UpdateSceneVisuals();
+                StartCoroutine(nameof(UpdateSceneVisuals));
             }
             On.RoR2.CharacterMotor.OnGroundHit += CharacterMotor_OnGroundHit;
             IL.EntityStates.GenericCharacterMain.ApplyJumpVelocity += GenericCharacterMain_ApplyJumpVelocity;

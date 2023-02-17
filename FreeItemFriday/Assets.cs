@@ -24,6 +24,7 @@ namespace FreeItemFriday
         {
             [CanBeNull] public static ItemDef Theremin;
             [CanBeNull] public static ItemDef Arrowhead;
+            [CanBeNull] public static ItemDef Prism;
         }
         public static class Artifacts
         {
