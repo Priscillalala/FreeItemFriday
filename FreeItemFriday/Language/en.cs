@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using RoR2;
 using UnityEngine;
 using static FreeItemFriday.Assets.Items;
+using static FreeItemFriday.Assets.Equipment;
 using static FreeItemFriday.Assets.Artifacts;
 using static FreeItemFriday.Assets.Achievements;
 
@@ -29,6 +30,16 @@ namespace FreeItemFriday.Language
             (Arrowhead?.descriptionToken, $"<style=cIsDamage>100%</style> chance to <style=cIsDamage>burn</style> on hit for <style=cIsDamage>{Items.Arrowhead.damage} <style=cStack>(+{Items.Arrowhead.damagePerStack} per stack)</style></style> damage."),
         };
         [LanguageCollectionProvider]
+        public static LanguageCollection GetEquipment() => new LanguageCollection
+        {
+            (DeathEye?.nameToken, $"Godless Eye"),
+            (DeathEye?.pickupToken, $"Obliterate all nearby enemies from existence, then yourself. Consumed on use."),
+            (DeathEye?.descriptionToken, $"Obliterate enemies within <style=cIsUtility>{Equipment.DeathEye.range}m</style> from existence. Then, <style=cIsHealth>obliterate yourself from existence</style>. Equipment is <style=cIsUtility>consumed</style> on use."),
+            (DeathEyeConsumed?.nameToken, $"Godless Eye (Consumed)"),
+            (DeathEyeConsumed?.pickupToken, $"Still shocking to the touch. Does nothing."),
+            (DeathEyeConsumed?.descriptionToken, $"Still shocking to the touch. Does nothing."),
+        };
+        [LanguageCollectionProvider]
         public static LanguageCollection GetArtifacts() => new LanguageCollection
         {
             (SlipperyTerrain?.nameToken, $"Artifact of Entropy"),
@@ -41,6 +52,8 @@ namespace FreeItemFriday.Language
             (BurnMultipleEnemies?.descriptionToken, "Ignite 10 enemies simultaneously."),
             (ObtainArtifactSlipperyTerrain?.nameToken, "Trial of Entropy"),
             (ObtainArtifactSlipperyTerrain?.descriptionToken, "Complete the Trial of Entropy."),
+            (CompleteMultiplayerUnknownEnding?.nameToken, "Fly Away Together"),
+            (CompleteMultiplayerUnknownEnding?.descriptionToken, "In multiplayer, obliterate at the Obelisk with a fellow survivor.."),
         };
     }
 }

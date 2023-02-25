@@ -26,6 +26,11 @@ namespace FreeItemFriday
             [CanBeNull] public static ItemDef Arrowhead;
             [CanBeNull] public static ItemDef Prism;
         }
+        public static class Equipment
+        {
+            [CanBeNull] public static EquipmentDef DeathEye;
+            [CanBeNull] public static EquipmentDef DeathEyeConsumed;
+        }
         public static class Artifacts
         {
             [CanBeNull] public static ArtifactDef SlipperyTerrain;
@@ -38,11 +43,13 @@ namespace FreeItemFriday
         {
             [CanBeNull] [TargetAssetName("FreeItemFriday.Items.Arrowhead")] public static UnlockableDef Arrowhead;
             [CanBeNull] [TargetAssetName("FreeItemFriday.Artifacts.SlipperyTerrain")] public static UnlockableDef SlipperyTerrain;
+            [CanBeNull] [TargetAssetName("FreeItemFriday.Items.DeathEye")] public static UnlockableDef DeathEye;
         }
         public static class Achievements
         {
             [CanBeNull] public static AchievementDef BurnMultipleEnemies;
             [CanBeNull] public static AchievementDef ObtainArtifactSlipperyTerrain;
+            [CanBeNull] public static AchievementDef CompleteMultiplayerUnknownEnding;
         }
     }
 }

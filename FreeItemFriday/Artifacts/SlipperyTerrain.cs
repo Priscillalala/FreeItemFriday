@@ -275,25 +275,22 @@ namespace FreeItemFriday.Artifacts
                 c.Emit(OpCodes.Ldarg, 0);
                 c.EmitDelegate<Func<Vector3, float, CharacterMotor, float>>((target, acceleration, motor) =>
                 {
-                    if (true)
+                    float multiplier = baseAccelerationMultiplier;
+                    if (target.sqrMagnitude > motor.velocity.sqrMagnitude)
                     {
-                        float multiplier = baseAccelerationMultiplier;
-                        if (target.sqrMagnitude > motor.velocity.sqrMagnitude)
-                        {
-                            multiplier *= positiveAccelerationCoefficient;
-                        }
-                        else if (!motor.isGrounded)
-                        {
-                            multiplier *= airAccelerationCoefficient;
-                        }
-                        if (!motor.body || motor.body.moveSpeed * motor.body.moveSpeed >= motor.velocity.sqrMagnitude)
-                        {
-                            acceleration *= multiplier;
-                        }
-                        else
-                        {
-                            acceleration *= 1 - ((1 - multiplier) * Mathf.Sqrt(motor.body.moveSpeed / motor.velocity.magnitude));
-                        }
+                        multiplier *= positiveAccelerationCoefficient;
+                    }
+                    else if (!motor.isGrounded)
+                    {
+                        multiplier *= airAccelerationCoefficient;
+                    }
+                    if (!motor.body || motor.body.moveSpeed * motor.body.moveSpeed >= motor.velocity.sqrMagnitude)
+                    {
+                        acceleration *= multiplier;
+                    }
+                    else
+                    {
+                        acceleration *= 1 - ((1 - multiplier) * Mathf.Sqrt(motor.body.moveSpeed / motor.velocity.magnitude));
                     }
                     return acceleration;
                 });
