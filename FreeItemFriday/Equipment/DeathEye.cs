@@ -289,6 +289,10 @@ namespace FreeItemFriday.Equipment
                 }
                 if (victim.master)
                 {
+                    if (victim.master.destroyOnBodyDeath)
+                    {
+                        Destroy(victim.master.gameObject, 1f);
+                    }
                     victim.master.preventGameOver = false;
                 }
                 EffectManager.SpawnEffect(destroyEffectPrefab, new EffectData
