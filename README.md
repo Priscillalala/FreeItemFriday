@@ -10,8 +10,17 @@ An example and test mod for GrooveSharedUtils. Currently adds 2 new items and an
     </tr>
     <tr>
         <td><img src="https://cdn.discordapp.com/attachments/965315944966668288/1074093938585124864/texUnlockIcon.png" alt="Unlockable"></td>
-        <td>Requires 'Burn to Kill`</td>
+        <td>Requires 'Burn to Kill'</td>
         <td>Ignite 10 enemies simultaneously.</td>
+    </tr>
+</table>
+
+## Equipment
+<table>
+    <tr>
+        <td><img src="https://cdn.discordapp.com/attachments/965315944966668288/1074093938585124864/texUnlockIcon.png" alt="Unlockable"></td>
+        <td>Requires 'Fly Away Together'</td>
+        <td>In multiplayer, obliterate at the Obelisk with a fellow survivor..</td>
     </tr>
 </table>
 
