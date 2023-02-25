@@ -1,5 +1,5 @@
 # FreeItemFriday
-An example and test mod for GrooveSharedUtils. Currently adds 2 new items and an artifact.
+An example and test mod for GrooveSharedUtils. Currently adds 3 new items and equipment as well as an artifact.
 
 ## Items
 <table>
